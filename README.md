@@ -1,6 +1,6 @@
 # athar
 
-**athar** (أثر — "trace") is an offline network-capture forensics tool. Point it
+**athar** is an offline network-capture forensics tool. Point it
 at a `.pcap` file and it reconstructs the conversations, dissects the metadata,
 flags suspicious behaviour, and renders an interactive investigation report you
 can hand to an analyst.
