@@ -1,0 +1,57 @@
+[build-system]
+requires = ["setuptools>=68", "pybind11>=2.11"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "athar"
+version = "0.24.0"
+description = "Network capture forensics with a visual investigation report"
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.10"
+keywords = ["forensics", "pcap", "network-security", "dfir", "incident-response"]
+authors = [{ name = "Khaled Roubi" }]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Information Technology",
+    "Topic :: Security",
+    "Programming Language :: Python :: 3",
+]
+
+# The core has no third-party dependencies -- the standard library is enough.
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=7", "ruff>=0.4", "mypy>=1.8", "pybind11>=2.10"]
+tls = ["cryptography>=42"]
+
+[project.scripts]
+athar = "athar.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/c-roubi/athar"
+Issues = "https://github.com/c-roubi/athar/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+
+[tool.ruff.lint.per-file-ignores]
+# html.py embeds long CSS/JS/template string literals.
+"src/athar/reporting/html.py" = ["E501"]
+"tests/*" = ["E501"]
+
+[tool.mypy]
+python_version = "3.10"
+strict = true
+files = ["src/athar"]
+
+[[tool.mypy.overrides]]
+module = ["geoip2.*"]
+ignore_missing_imports = true

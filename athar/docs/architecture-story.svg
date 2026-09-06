@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920" font-family="'Helvetica Neue', Arial, sans-serif" role="img" aria-label="athar architecture, vertical story">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M2 1L8 5L2 9" fill="none" stroke="#7C7C74" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+
+  <rect width="1080" height="1920" fill="#1C1C1A"/>
+
+  <text x="540" y="392" text-anchor="middle" font-size="90" font-weight="800" letter-spacing="2" fill="#F2F2EE">athar</text>
+  <text x="540" y="448" text-anchor="middle" font-size="24" letter-spacing="6" fill="#8F8F87" font-family="'DejaVu Sans Mono', Menlo, monospace">NETWORK FORENSIC ANALYSIS</text>
+  <line x1="440" y1="482" x2="640" y2="482" stroke="#45453F" stroke-width="2.5"/>
+
+  <g>
+    <rect x="140" y="530" width="800" height="150" rx="16" fill="#3A3A37" stroke="#4A4A45" stroke-width="1"/>
+    <text x="540" y="596" text-anchor="middle" font-size="36" font-weight="700" fill="#EDEBE4">Packet ingestion</text>
+    <text x="540" y="640" text-anchor="middle" font-size="25" fill="#B4B2A9" font-family="'DejaVu Sans Mono', Menlo, monospace">pcap &#183; pcapng &#183; live capture</text>
+  </g>
+  <line x1="540" y1="682" x2="540" y2="728" stroke="#7C7C74" stroke-width="2.2" marker-end="url(#arrow)"/>
+
+  <g>
+    <rect x="140" y="730" width="800" height="150" rx="16" fill="#7A3520" stroke="#8E4128" stroke-width="1"/>
+    <text x="540" y="796" text-anchor="middle" font-size="36" font-weight="700" fill="#F6E7DF">C++ decode core</text>
+    <text x="540" y="840" text-anchor="middle" font-size="25" fill="#E3AC93" font-family="'DejaVu Sans Mono', Menlo, monospace">ethernet &#183; ip &#183; tcp &#183; udp</text>
+  </g>
+  <line x1="540" y1="882" x2="540" y2="928" stroke="#7C7C74" stroke-width="2.2" marker-end="url(#arrow)"/>
+
+  <g>
+    <rect x="140" y="930" width="800" height="150" rx="16" fill="#0F5A48" stroke="#166B57" stroke-width="1"/>
+    <text x="540" y="996" text-anchor="middle" font-size="36" font-weight="700" fill="#DFF3EC">Python analysis + enrichment</text>
+    <text x="540" y="1040" text-anchor="middle" font-size="25" fill="#8FCBB9" font-family="'DejaVu Sans Mono', Menlo, monospace">dissect &#183; detect &#183; ja3 &#183; ioc</text>
+  </g>
+  <line x1="540" y1="1082" x2="540" y2="1128" stroke="#7C7C74" stroke-width="2.2" marker-end="url(#arrow)"/>
+
+  <g>
+    <rect x="140" y="1130" width="800" height="150" rx="16" fill="#175E9C" stroke="#1E6EB2" stroke-width="1"/>
+    <text x="540" y="1196" text-anchor="middle" font-size="36" font-weight="700" fill="#E4F0FB">SQLite forensic store</text>
+    <text x="540" y="1240" text-anchor="middle" font-size="25" fill="#A9CBEE" font-family="'DejaVu Sans Mono', Menlo, monospace">queryable multi-case store</text>
+  </g>
+
+  <path d="M540 1280 L540 1308" fill="none" stroke="#7C7C74" stroke-width="2.2"/>
+  <circle cx="540" cy="1308" r="5" fill="#7C7C74"/>
+  <path d="M540 1308 L330 1308 L330 1330" fill="none" stroke="#7C7C74" stroke-width="2.2" marker-end="url(#arrow)"/>
+  <path d="M540 1308 L750 1308 L750 1330" fill="none" stroke="#7C7C74" stroke-width="2.2" marker-end="url(#arrow)"/>
+
+  <g>
+    <rect x="140" y="1334" width="380" height="150" rx="16" fill="#3A3A37" stroke="#4A4A45" stroke-width="1"/>
+    <text x="330" y="1400" text-anchor="middle" font-size="36" font-weight="700" fill="#EDEBE4">Reports</text>
+    <text x="330" y="1444" text-anchor="middle" font-size="24" fill="#B4B2A9" font-family="'DejaVu Sans Mono', Menlo, monospace">cli &#183; json &#183; html</text>
+  </g>
+  <g>
+    <rect x="560" y="1334" width="380" height="150" rx="16" fill="#4A3F9E" stroke="#584CB4" stroke-width="1"/>
+    <text x="750" y="1400" text-anchor="middle" font-size="36" font-weight="700" fill="#EAE8FB">Web dashboard</text>
+    <text x="750" y="1444" text-anchor="middle" font-size="24" fill="#BBB4E8" font-family="'DejaVu Sans Mono', Menlo, monospace">react &#183; typescript</text>
+  </g>
+
+  <g font-size="24" font-family="'DejaVu Sans Mono', Menlo, monospace" fill="#B4B2A9">
+    <rect x="166" y="1546" width="20" height="20" rx="5" fill="#D85A30"/>
+    <text x="196" y="1564">C++ core</text>
+    <rect x="342" y="1546" width="20" height="20" rx="5" fill="#1D9E75"/>
+    <text x="372" y="1564">Python</text>
+    <rect x="490" y="1546" width="20" height="20" rx="5" fill="#378ADD"/>
+    <text x="520" y="1564">SQLite</text>
+    <rect x="638" y="1546" width="20" height="20" rx="5" fill="#7F77DD"/>
+    <text x="668" y="1564">React / TS</text>
+    <rect x="842" y="1546" width="20" height="20" rx="5" fill="#888780"/>
+    <text x="872" y="1564">I/O</text>
+  </g>
+</svg>

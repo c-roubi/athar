@@ -1,0 +1,8 @@
+"""Make the package and the tools/ helpers importable during tests."""
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT / "src"))
+sys.path.insert(0, str(ROOT / "tools"))
+sys.path.insert(0, str(Path(__file__).resolve().parent))

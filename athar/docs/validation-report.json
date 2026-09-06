@@ -1,0 +1,37 @@
+{
+  "tool_version": "0.17.0",
+  "detectors": {
+    "port_scan": {
+      "tp": 2,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    "plaintext_credentials": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    "beaconing": {
+      "tp": 2,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    "dns_tunneling": {
+      "tp": 2,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+    }
+  },
+  "benign_controls": {
+    "clean": 4,
+    "total": 4
+  }
+}

@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="600" viewBox="0 0 760 600" font-family="'Helvetica Neue', Arial, sans-serif" role="img" aria-label="athar architecture diagram">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M2 1L8 5L2 9" fill="none" stroke="#A9A89F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+
+  <rect width="760" height="600" fill="#F7F6F2"/>
+
+  <text x="190" y="52" font-size="27" font-weight="700" letter-spacing="0.5" fill="#26251F">athar</text>
+  <text x="192" y="73" font-size="11.5" letter-spacing="2.5" fill="#8B8A80" font-family="'DejaVu Sans Mono', Menlo, monospace">NETWORK FORENSIC ANALYSIS &#183; ARCHITECTURE</text>
+  <line x1="190" y1="86" x2="570" y2="86" stroke="#DAD8D0" stroke-width="1"/>
+
+  <g>
+    <rect x="190" y="98" width="380" height="58" rx="8" fill="#FFFFFF" stroke="#D7D6CF" stroke-width="1"/>
+    <rect x="204" y="112" width="4" height="30" rx="2" fill="#8A897F"/>
+    <text x="224" y="123" font-size="15" font-weight="600" fill="#2A2A24">Packet ingestion</text>
+    <text x="224" y="141" font-size="12" fill="#75746C" font-family="'DejaVu Sans Mono', Menlo, monospace">pcap &#183; pcapng &#183; live capture</text>
+  </g>
+  <line x1="380" y1="156" x2="380" y2="188" stroke="#B7B6AD" stroke-width="1.2" marker-end="url(#arrow)"/>
+
+  <g>
+    <rect x="190" y="190" width="380" height="58" rx="8" fill="#FFFFFF" stroke="#D7D6CF" stroke-width="1"/>
+    <rect x="204" y="204" width="4" height="30" rx="2" fill="#A05C41"/>
+    <text x="224" y="215" font-size="15" font-weight="600" fill="#2A2A24">C++ decode core</text>
+    <text x="224" y="233" font-size="12" fill="#75746C" font-family="'DejaVu Sans Mono', Menlo, monospace">ethernet &#183; ip &#183; tcp &#183; udp</text>
+  </g>
+  <line x1="380" y1="248" x2="380" y2="280" stroke="#B7B6AD" stroke-width="1.2" marker-end="url(#arrow)"/>
+
+  <g>
+    <rect x="190" y="282" width="380" height="58" rx="8" fill="#FFFFFF" stroke="#D7D6CF" stroke-width="1"/>
+    <rect x="204" y="296" width="4" height="30" rx="2" fill="#4E876F"/>
+    <text x="224" y="307" font-size="15" font-weight="600" fill="#2A2A24">Python analysis + enrichment</text>
+    <text x="224" y="325" font-size="12" fill="#75746C" font-family="'DejaVu Sans Mono', Menlo, monospace">dissect &#183; detect &#183; ja3 &#183; ioc</text>
+  </g>
+  <line x1="380" y1="340" x2="380" y2="372" stroke="#B7B6AD" stroke-width="1.2" marker-end="url(#arrow)"/>
+
+  <g>
+    <rect x="190" y="374" width="380" height="58" rx="8" fill="#FFFFFF" stroke="#D7D6CF" stroke-width="1"/>
+    <rect x="204" y="388" width="4" height="30" rx="2" fill="#4B7396"/>
+    <text x="224" y="399" font-size="15" font-weight="600" fill="#2A2A24">SQLite forensic store</text>
+    <text x="224" y="417" font-size="12" fill="#75746C" font-family="'DejaVu Sans Mono', Menlo, monospace">queryable multi-case store</text>
+  </g>
+  <path d="M380 432 L380 447 L280 447 L280 461" fill="none" stroke="#B7B6AD" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <path d="M380 432 L380 447 L480 447 L480 461" fill="none" stroke="#B7B6AD" stroke-width="1.2" marker-end="url(#arrow)"/>
+
+  <g>
+    <rect x="190" y="464" width="180" height="58" rx="8" fill="#FFFFFF" stroke="#D7D6CF" stroke-width="1"/>
+    <rect x="204" y="478" width="4" height="30" rx="2" fill="#8A897F"/>
+    <text x="224" y="489" font-size="15" font-weight="600" fill="#2A2A24">Reports</text>
+    <text x="224" y="507" font-size="12" fill="#75746C" font-family="'DejaVu Sans Mono', Menlo, monospace">cli &#183; json &#183; html</text>
+  </g>
+  <g>
+    <rect x="390" y="464" width="180" height="58" rx="8" fill="#FFFFFF" stroke="#D7D6CF" stroke-width="1"/>
+    <rect x="404" y="478" width="4" height="30" rx="2" fill="#6B6592"/>
+    <text x="424" y="489" font-size="15" font-weight="600" fill="#2A2A24">Web dashboard</text>
+    <text x="424" y="507" font-size="12" fill="#75746C" font-family="'DejaVu Sans Mono', Menlo, monospace">react &#183; typescript</text>
+  </g>
+
+  <g font-size="11.5" font-family="'DejaVu Sans Mono', Menlo, monospace" fill="#75746C">
+    <rect x="194" y="551" width="11" height="11" rx="2.5" fill="#A05C41"/>
+    <text x="211" y="560">C++ core</text>
+    <rect x="282" y="551" width="11" height="11" rx="2.5" fill="#4E876F"/>
+    <text x="299" y="560">Python</text>
+    <rect x="357" y="551" width="11" height="11" rx="2.5" fill="#4B7396"/>
+    <text x="374" y="560">SQLite</text>
+    <rect x="432" y="551" width="11" height="11" rx="2.5" fill="#6B6592"/>
+    <text x="449" y="560">React / TS</text>
+    <rect x="533" y="551" width="11" height="11" rx="2.5" fill="#8A897F"/>
+    <text x="550" y="560">I/O</text>
+  </g>
+
+  <text x="570" y="584" text-anchor="end" font-size="11" letter-spacing="0.5" fill="#9A998F" font-family="'DejaVu Sans Mono', Menlo, monospace">github.com/c-roubi/athar</text>
+</svg>

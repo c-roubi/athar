@@ -1,0 +1,3284 @@
+{
+  "source": "sample.pcap",
+  "started_iso": "2024-09-10 20:26:40Z",
+  "ended_iso": "2024-09-10 20:30:54Z",
+  "duration": 254.4,
+  "packets": 1113,
+  "bytes": 1351106,
+  "host_count": 32,
+  "flow_count": 67,
+  "case_id": "ATH-578D354C",
+  "provenance": {
+    "examiner": "K. Roubi",
+    "organization": "DFIR Lab",
+    "case_number": "CU-2026-0042",
+    "authority": "Warrant 2026/17",
+    "notes": "",
+    "source_path": "sample.pcap",
+    "source_sha256": "3d519484ddb92464f91ce52117a8d672a2ac147828e8bd40a78a2537f736a03c",
+    "source_bytes": 1384124,
+    "tool": "athar",
+    "tool_version": "0.23.0",
+    "backend": "python",
+    "analyzed_at": "2026-08-31T08:11:46+00:00"
+  },
+  "tcp_health": {
+    "retransmissions": 7,
+    "fast_retransmissions": 0,
+    "out_of_order": 0,
+    "resets": 1,
+    "zero_window": 1,
+    "syns": 65
+  },
+  "stories": [
+    {
+      "host": "192.168.1.66",
+      "score": 273,
+      "span": 4.4,
+      "tactics": [
+        "Discovery",
+        "Credential Access",
+        "Lateral Movement",
+        "Command & Control"
+      ],
+      "stages": [
+        {
+          "tactic": "Discovery",
+          "events": [
+            {
+              "severity": "medium",
+              "title": "Service on a non-standard port",
+              "summary": "RDP to 192.168.1.14 on port 4444 (normally 3389)",
+              "detector": "port_anomaly",
+              "technique": "T1571"
+            },
+            {
+              "severity": "high",
+              "title": "TCP port scan",
+              "summary": "192.168.1.66 probed 20 ports on 192.168.1.1",
+              "detector": "port_scan",
+              "technique": "T1046"
+            }
+          ]
+        },
+        {
+          "tactic": "Credential Access",
+          "events": [
+            {
+              "severity": "high",
+              "title": "Possible Kerberoasting",
+              "summary": "192.168.1.66 requested 12 Kerberos service tickets from 192.168.1.5",
+              "detector": "kerberoasting",
+              "technique": "T1558.003"
+            }
+          ]
+        },
+        {
+          "tactic": "Lateral Movement",
+          "events": [
+            {
+              "severity": "high",
+              "title": "Possible lateral movement",
+              "summary": "192.168.1.66 opened RDP to 5 internal hosts (192.168.1.10, 192.168.1.11, 192.168.1.12, 192.168.1.13, 192.168.1.14)",
+              "detector": "lateral_movement",
+              "technique": "T1021"
+            },
+            {
+              "severity": "high",
+              "title": "Possible lateral movement",
+              "summary": "192.168.1.66 opened SMB to 4 internal hosts (192.168.1.10, 192.168.1.11, 192.168.1.12, 192.168.1.13)",
+              "detector": "lateral_movement",
+              "technique": "T1021"
+            },
+            {
+              "severity": "high",
+              "title": "Administrative share access",
+              "summary": "192.168.1.66 accessed \\\\192.168.1.10\\ADMIN$ on 192.168.1.10",
+              "detector": "admin_share_access",
+              "technique": "T1021.002"
+            },
+            {
+              "severity": "high",
+              "title": "Administrative share access",
+              "summary": "192.168.1.66 accessed \\\\192.168.1.11\\ADMIN$ on 192.168.1.11",
+              "detector": "admin_share_access",
+              "technique": "T1021.002"
+            },
+            {
+              "severity": "high",
+              "title": "Administrative share access",
+              "summary": "192.168.1.66 accessed \\\\192.168.1.12\\ADMIN$ on 192.168.1.12",
+              "detector": "admin_share_access",
+              "technique": "T1021.002"
+            },
+            {
+              "severity": "high",
+              "title": "Administrative share access",
+              "summary": "192.168.1.66 accessed \\\\192.168.1.13\\ADMIN$ on 192.168.1.13",
+              "detector": "admin_share_access",
+              "technique": "T1021.002"
+            }
+          ]
+        },
+        {
+          "tactic": "Command & Control",
+          "events": [
+            {
+              "severity": "high",
+              "title": "Periodic beaconing",
+              "summary": "192.168.1.66 called 192.168.1.5:88 every ~0s, 12 times",
+              "detector": "beaconing",
+              "technique": "T1071"
+            },
+            {
+              "severity": "high",
+              "title": "Connection to anonymising network",
+              "summary": "192.168.1.66 connected to 192.168.1.14:4444 (common C2 port)",
+              "detector": "anonymizer",
+              "technique": "T1090.003"
+            },
+            {
+              "severity": "high",
+              "title": "Connection to anonymising network",
+              "summary": "192.168.1.66 connected to 192.168.1.1:8443 (common C2 port)",
+              "detector": "anonymizer",
+              "technique": "T1090.003"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "host": "192.168.1.77",
+      "score": 143,
+      "span": 32.0,
+      "tactics": [
+        "Command & Control",
+        "Other"
+      ],
+      "stages": [
+        {
+          "tactic": "Command & Control",
+          "events": [
+            {
+              "severity": "high",
+              "title": "Connection to anonymising network",
+              "summary": "192.168.1.77 connected to 185.220.101.5:9001 (Tor ORPort)",
+              "detector": "anonymizer",
+              "technique": "T1090.003"
+            },
+            {
+              "severity": "critical",
+              "title": "Traffic to a known-bad host",
+              "summary": "contact with flagged address 185.220.101.5",
+              "detector": "ioc_match",
+              "technique": "T1071"
+            },
+            {
+              "severity": "high",
+              "title": "Periodic beaconing",
+              "summary": "192.168.1.77 called 185.220.101.5:443 every ~30s, 9 times",
+              "detector": "beaconing",
+              "technique": "T1071"
+            },
+            {
+              "severity": "high",
+              "title": "TLS connection to a known-bad domain",
+              "summary": "192.168.1.77 reached update.evil-c2.net over TLS",
+              "detector": "ioc_match",
+              "technique": "T1071"
+            },
+            {
+              "severity": "high",
+              "title": "Known-bad TLS fingerprint",
+              "summary": "192.168.1.77 presented flagged JA3 e5c6ecce5448\u2026",
+              "detector": "ioc_match",
+              "technique": "T1071"
+            }
+          ]
+        },
+        {
+          "tactic": "Other",
+          "events": [
+            {
+              "severity": "medium",
+              "title": "Suspicious TLS certificate",
+              "summary": "185.220.101.5 served a self-signed and short-lived (14d) certificate (subject update.evil-c2.net)",
+              "detector": "suspicious_certificate",
+              "technique": "T1587.003"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "host": "192.168.1.50",
+      "score": 80,
+      "span": 0.5,
+      "tactics": [
+        "Credential Access"
+      ],
+      "stages": [
+        {
+          "tactic": "Credential Access",
+          "events": [
+            {
+              "severity": "critical",
+              "title": "Credentials sent in the clear",
+              "summary": "HTTP Basic login 'admin' / 'password123' to nas.local",
+              "detector": "plaintext_credentials",
+              "technique": "T1040"
+            },
+            {
+              "severity": "critical",
+              "title": "Credentials sent in the clear",
+              "summary": "FTP login 'ftpadmin' / 'Sup3rSecret' to 192.168.1.30",
+              "detector": "plaintext_credentials",
+              "technique": "T1040"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "host": "192.168.1.88",
+      "score": 55,
+      "span": 0.0,
+      "tactics": [
+        "Command & Control",
+        "Exfiltration"
+      ],
+      "stages": [
+        {
+          "tactic": "Command & Control",
+          "events": [
+            {
+              "severity": "high",
+              "title": "Lookup of a known-bad domain",
+              "summary": "192.168.1.88 resolved cf10epf91dhodzdoc9is0j8ht9lg.tunnel.evil-c2.net",
+              "detector": "ioc_match",
+              "technique": "T1071"
+            }
+          ]
+        },
+        {
+          "tactic": "Exfiltration",
+          "events": [
+            {
+              "severity": "high",
+              "title": "Possible DNS tunneling",
+              "summary": "192.168.1.88 made 25 high-entropy lookups under evil-c2.net",
+              "detector": "dns_tunneling",
+              "technique": "T1071.004"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "host": "192.168.1.105",
+      "score": 40,
+      "span": 0.0,
+      "tactics": [
+        "Credential Access"
+      ],
+      "stages": [
+        {
+          "tactic": "Credential Access",
+          "events": [
+            {
+              "severity": "critical",
+              "title": "Credentials sent in the clear",
+              "summary": "SNMP community login 'public' to 192.168.1.42",
+              "detector": "plaintext_credentials",
+              "technique": "T1040"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "host": "192.168.1.61",
+      "score": 40,
+      "span": 0.0,
+      "tactics": [
+        "Credential Access"
+      ],
+      "stages": [
+        {
+          "tactic": "Credential Access",
+          "events": [
+            {
+              "severity": "critical",
+              "title": "Credentials sent in the clear",
+              "summary": "SIP login '1001' to pbx.example",
+              "detector": "plaintext_credentials",
+              "technique": "T1040"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "host": "192.168.1.62",
+      "score": 40,
+      "span": 0.0,
+      "tactics": [
+        "Credential Access"
+      ],
+      "stages": [
+        {
+          "tactic": "Credential Access",
+          "events": [
+            {
+              "severity": "critical",
+              "title": "Credentials sent in the clear",
+              "summary": "SMTP login '[email protected]' / 'hunter2' to 203.0.113.25",
+              "detector": "plaintext_credentials",
+              "technique": "T1040"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "host": "192.168.1.101",
+      "score": 40,
+      "span": 0.0,
+      "tactics": [
+        "Credential Access"
+      ],
+      "stages": [
+        {
+          "tactic": "Credential Access",
+          "events": [
+            {
+              "severity": "critical",
+              "title": "Credentials sent in the clear",
+              "summary": "NTLM login 'CORP\\jdoe' to 192.168.1.20",
+              "detector": "plaintext_credentials",
+              "technique": "T1040"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "host": "192.168.1.102",
+      "score": 40,
+      "span": 0.0,
+      "tactics": [
+        "Credential Access"
+      ],
+      "stages": [
+        {
+          "tactic": "Credential Access",
+          "events": [
+            {
+              "severity": "critical",
+              "title": "Credentials sent in the clear",
+              "summary": "LDAP login 'cn=admin,dc=corp' to 192.168.1.5",
+              "detector": "plaintext_credentials",
+              "technique": "T1040"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "host": "192.168.1.104",
+      "score": 40,
+      "span": 0.0,
+      "tactics": [
+        "Credential Access"
+      ],
+      "stages": [
+        {
+          "tactic": "Credential Access",
+          "events": [
+            {
+              "severity": "critical",
+              "title": "Credentials sent in the clear",
+              "summary": "Telnet login 'operator' to 192.168.1.41",
+              "detector": "plaintext_credentials",
+              "technique": "T1040"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "severity": {
+    "critical": 9,
+    "high": 18,
+    "medium": 3,
+    "low": 0,
+    "info": 0
+  },
+  "hosts": [
+    {
+      "ip": "192.168.1.55",
+      "mac": "aa:bb:cc:dd:ee:ff",
+      "role": "endpoint",
+      "packets": 931,
+      "bytes": 1337407,
+      "peers": 1,
+      "services": [],
+      "protocols": [
+        "tcp"
+      ],
+      "flagged": true,
+      "private": true,
+      "geo": {
+        "ip": "192.168.1.55",
+        "scope": "private",
+        "country": "",
+        "country_code": "",
+        "city": "",
+        "asn": "",
+        "organization": ""
+      },
+      "dns": [],
+      "http": [
+        {
+          "method": "POST",
+          "host": "filedrop.example",
+          "path": "/upload",
+          "creds": ""
+        }
+      ],
+      "sni": [],
+      "ja3": [],
+      "ja3s": [],
+      "objects": [
+        {
+          "kind": "request",
+          "method": "POST",
+          "host": "filedrop.example",
+          "path": "/upload",
+          "filename": "payroll.csv",
+          "content_type": "text/csv",
+          "declared_bytes": 1300000,
+          "truncated": false,
+          "sha256": "be2c3c08cdcfc7babdf4aebba854b533e7befa50cd88b4ddd51fb4c2651b868b",
+          "body_kind": "text",
+          "preview": "CONFIDENTIAL,ssn,salary\r\nemployee-records,99999999999,120000\r\nCONFIDENTIAL,ssn,salary\r\nemployee-records,99999999999,120000\r\nCONFIDENTIAL,ssn,salary\r\nemployee-records,99999999999,120000\r\nCONFIDENTIAL,ssn,salary\r\nemployee-records,99999999999,120000\r\nCONFIDENTIAL,ssn,salary\r\nemployee-records,99999999999,120000\r\nCONFIDENTIAL,ssn,salary\r\nemployee-records,99999999999,120000\r\nCONFIDENTIAL,ssn,salary\r\nemp"
+        }
+      ],
+      "certificates": [],
+      "sessions": [],
+      "findings": [
+        9
+      ]
+    },
+    {
+      "ip": "203.0.113.9",
+      "mac": "aa:bb:cc:dd:ee:ff",
+      "role": "external",
+      "packets": 931,
+      "bytes": 1337407,
+      "peers": 1,
+      "services": [
+        80
+      ],
+      "protocols": [
+        "tcp"
+      ],
+      "flagged": true,
+      "private": false,
+      "geo": {
+        "ip": "203.0.113.9",
+        "scope": "private",
+        "country": "",
+        "country_code": "",
+        "city": "",
+        "asn": "",
+        "organization": ""
+      },
+      "dns": [],
+      "http": [],
+      "sni": [],
+      "ja3": [],
+      "ja3s": [],
+      "objects": [],
+      "certificates": [],
+      "sessions": [],
+      "findings": [
+        9
+      ]
+    },
+    {
+      "ip": "192.168.1.66",
+      "mac": "00:1a:2b:00:00:cc",
+      "role": "scanner",
+      "packets": 83,
+      "bytes": 4548,
+      "peers": 7,
+      "services": [],
+      "protocols": [
+        "tcp"
+      ],
+      "flagged": true,
+      "private": true,
+      "geo": {
+        "ip": "192.168.1.66",
+        "scope": "private",
+        "country": "",
+        "country_code": "",
+        "city": "",
+        "asn": "",
+        "organization": ""
+      },
+      "dns": [],
+      "http": [],
+      "sni": [],
+      "ja3": [],
+      "ja3s": [],
+      "objects": [],
+      "certificates": [],
+      "sessions": [
+        {
+          "protocol": "RDP",
+          "detail": "protocol_detail=X.224 connection request, cookie_user=administrator, negotiation=requested"
+        },
+        {
+          "protocol": "SMB",
+          "detail": "version=SMB2/3, shares=['\\\\\\\\192.168.1.10\\\\ADMIN$'], admin_shares=['\\\\\\\\192.168.1.10\\\\ADMIN$']"
+        },
+        {
+          "protocol": "RDP",
+          "detail": "protocol_detail=X.224 connection request, cookie_user=administrator, negotiation=requested"
+        },
+        {
+          "protocol": "SMB",
+          "detail": "version=SMB2/3, shares=['\\\\\\\\192.168.1.11\\\\ADMIN$'], admin_shares=['\\\\\\\\192.168.1.11\\\\ADMIN$']"
+        },
+        {
+          "protocol": "RDP",
+          "detail": "protocol_detail=X.224 connection request, cookie_user=administrator, negotiation=requested"
+        },
+        {
+          "protocol": "SMB",
+          "detail": "version=SMB2/3, shares=['\\\\\\\\192.168.1.12\\\\ADMIN$'], admin_shares=['\\\\\\\\192.168.1.12\\\\ADMIN$']"
+        },
+        {
+          "protocol": "RDP",
+          "detail": "protocol_detail=X.224 connection request, cookie_user=administrator, negotiation=requested"
+        },
+        {
+          "protocol": "SMB",
+          "detail": "version=SMB2/3, shares=['\\\\\\\\192.168.1.13\\\\ADMIN$'], admin_shares=['\\\\\\\\192.168.1.13\\\\ADMIN$']"
+        },
+        {
+          "protocol": "Kerberos",
+          "detail": "message_type=TGS-REQ"
+        },
+        {
+          "protocol": "Kerberos",
+          "detail": "message_type=TGS-REQ"
+        },
+        {
+          "protocol": "Kerberos",
+          "detail": "message_type=TGS-REQ"
+        },
+        {
+          "protocol": "Kerberos",
+          "detail": "message_type=TGS-REQ"
+        },
+        {
+          "protocol": "Kerberos",
+          "detail": "message_type=TGS-REQ"
+        },
+        {
+          "protocol": "Kerberos",
+          "detail": "message_type=TGS-REQ"
+        },
+        {
+          "protocol": "Kerberos",
+          "detail": "message_type=TGS-REQ"
+        },
+        {
+          "protocol": "Kerberos",
+          "detail": "message_type=TGS-REQ"
+        },
+        {
+          "protocol": "Kerberos",
+          "detail": "message_type=TGS-REQ"
+        },
+        {
+          "protocol": "Kerberos",
+          "detail": "message_type=TGS-REQ"
+        },
+        {
+          "protocol": "Kerberos",
+          "detail": "message_type=TGS-REQ"
+        },
+        {
+          "protocol": "Kerberos",
+          "detail": "message_type=TGS-REQ"
+        }
+      ],
+      "findings": [
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        22,
+        23,
+        27
+      ]
+    },
+    {
+      "ip": "192.168.1.1",
+      "mac": "00:1a:2b:00:00:01",
+      "role": "endpoint",
+      "packets": 52,
+      "bytes": 4163,
+      "peers": 4,
+      "services": [
+        53
+      ],
+      "protocols": [
+        "tcp",
+        "udp"
+      ],
+      "flagged": true,
+      "private": true,
+      "geo": {
+        "ip": "192.168.1.1",
+        "scope": "private",
+        "country": "",
+        "country_code": "",
+        "city": "",
+        "asn": "",
+        "organization": ""
+      },
+      "dns": [
+        {
+          "name": "cdn.example.com",
+          "type": "A"
+        },
+        {
+          "name": "api.example.com",
+          "type": "A"
+        },
+        {
+          "name": "www.example.com",
+          "type": "A"
+        }
+      ],
+      "http": [],
+      "sni": [],
+      "ja3": [],
+      "ja3s": [],
+      "objects": [],
+      "certificates": [],
+      "sessions": [],
+      "findings": [
+        22,
+        23
+      ]
+    },
+    {
+      "ip": "192.168.1.88",
+      "mac": "00:1a:2b:00:00:ee",
+      "role": "endpoint",
+      "packets": 25,
+      "bytes": 2625,
+      "peers": 1,
+      "services": [],
+      "protocols": [
+        "udp"
+      ],
+      "flagged": true,
+      "private": true,
+      "geo": {
+        "ip": "192.168.1.88",
+        "scope": "private",
+        "country": "",
+        "country_code": "",
+        "city": "",
+        "asn": "",
+        "organization": ""
+      },
+      "dns": [
+        {
+          "name": "cf10epf91dhodzdoc9is0j8ht9lg.tunnel.evil-c2.net",
+          "type": "TXT"
+        },
+        {
+          "name": "mxg9edn581u33xtplpft75v2seh6.tunnel.evil-c2.net",
+          "type": "TXT"
+        },
+        {
+          "name": "0kvj50ce9uvw53efr4edt2sywb3w.tunnel.evil-c2.net",
+          "type": "TXT"
+        },
+        {
+          "name": "kh5dnsipzz5fk2z9ri19r0wyojfl.tunnel.evil-c2.net",
+          "type": "TXT"
+        },
+        {
+          "name": "jooa5lqsaj08xui6d39zzzzg4zdm.tunnel.evil-c2.net",
+          "type": "TXT"
+        },
+        {
+          "name": "en2khvdgaj8gxbenyjqwx4hh5344.tunnel.evil-c2.net",
+          "type": "TXT"
+        },
+        {
+          "name": "tfjgvq4k7bn7xj8b7tfq7xkwo886.tunnel.evil-c2.net",
+          "type": "TXT"
+        },
+        {
+          "name": "vompzom75wbbr4qmw2wxfogo4mvn.tunnel.evil-c2.net",
+          "type": "TXT"
+        },
+        {
+          "name": "4a4wfhym4l1vfz3zfkkibj3j4wj9.tunnel.evil-c2.net",
+          "type": "TXT"
+        },
+        {
+          "name": "9ibag7i1mnbqns6puq80idw3706i.tunnel.evil-c2.net",
+          "type": "TXT"
+        },
+        {
+          "name": "8j76b2lajlj4h9du7794g9dpmrcg.tunnel.evil-c2.net",
+          "type": "TXT"
+        },
+        {
+          "name": "629be2u66mr26846p7q9m2i0hz2u.tunnel.evil-c2.net",
+          "type": "TXT"
+        },
+        {
+          "name": "ep1enthjxjqi3ogz5kok16zv0mwu.tunnel.evil-c2.net",
+          "type": "TXT"
+        },
+        {
+          "name": "fxbv932byv7s6ehogfqrclri1qzj.tunnel.evil-c2.net",
+          "type": "TXT"
+        },
+        {
+          "name": "865ufrdl1erbfqfoeqh3av90ric7.tunnel.evil-c2.net",
+          "type": "TXT"
+        },
+        {
+          "name": "phkqdlmtt7ns26lrwbqcab69m64p.tunnel.evil-c2.net",
+          "type": "TXT"
+        },
+        {
+          "name": "2g158z6tnovmizwdiaeq1kdfy6sp.tunnel.evil-c2.net",
+          "type": "TXT"
+        },
+        {
+          "name": "sc3lkr2aqxv9upctnwlavyf4r6mp.tunnel.evil-c2.net",
+          "type": "TXT"
+        },
+        {
+          "name": "6afqfjzczbttof7jyu5jsjc616i7.tunnel.evil-c2.net",
+          "type": "TXT"
+        },
+        {
+          "name": "6bofbcixgy29db8p5qa3e68f7e4q.tunnel.evil-c2.net",
+          "type": "TXT"
+        },
+        {
+          "name": "eqpno35ye4scmejvqtia4d5rgn5s.tunnel.evil-c2.net",
+          "type": "TXT"
+        },
+        {
+          "name": "7s333h9mtf4bs3e62rynnefj7qxi.tunnel.evil-c2.net",
+          "type": "TXT"
+        },
+        {
+          "name": "6rhxo55zbka52ztj0wyuhvauvzhm.tunnel.evil-c2.net",
+          "type": "TXT"
+        },
+        {
+          "name": "asqxezyex1rdrgdsjpr16umx1bz9.tunnel.evil-c2.net",
+          "type": "TXT"
+        },
+        {
+          "name": "9nfd02is5d9ik40vstqqzpt49zhk.tunnel.evil-c2.net",
+          "type": "TXT"
+        }
+      ],
+      "http": [],
+      "sni": [],
+      "ja3": [],
+      "ja3s": [],
+      "objects": [],
+      "certificates": [],
+      "sessions": [],
+      "findings": [
+        25,
+        26
+      ]
+    },
+    {
+      "ip": "192.168.1.5",
+      "mac": "aa:bb:cc:dd:ee:ff",
+      "role": "server",
+      "packets": 42,
+      "bytes": 2469,
+      "peers": 3,
+      "services": [
+        88,
+        389,
+        5060
+      ],
+      "protocols": [
+        "tcp"
+      ],
+      "flagged": true,
+      "private": true,
+      "geo": {
+        "ip": "192.168.1.5",
+        "scope": "private",
+        "country": "",
+        "country_code": "",
+        "city": "",
+        "asn": "",
+        "organization": ""
+      },
+      "dns": [],
+      "http": [],
+      "sni": [],
+      "ja3": [],
+      "ja3s": [],
+      "objects": [],
+      "certificates": [],
+      "sessions": [],
+      "findings": [
+        2,
+        6,
+        16,
+        17
+      ]
+    },
+    {
+      "ip": "192.168.1.77",
+      "mac": "00:1a:2b:00:00:dd",
+      "role": "endpoint",
+      "packets": 22,
+      "bytes": 1897,
+      "peers": 1,
+      "services": [],
+      "protocols": [
+        "tcp"
+      ],
+      "flagged": true,
+      "private": true,
+      "geo": {
+        "ip": "192.168.1.77",
+        "scope": "private",
+        "country": "",
+        "country_code": "",
+        "city": "",
+        "asn": "",
+        "organization": ""
+      },
+      "dns": [],
+      "http": [],
+      "sni": [
+        "update.evil-c2.net"
+      ],
+      "ja3": [
+        "e4038a8939cf6b4835bc62bd78e4e818",
+        "e5c6ecce54485f312c2d9bb1e54ab124"
+      ],
+      "ja3s": [],
+      "objects": [],
+      "certificates": [],
+      "sessions": [],
+      "findings": [
+        4,
+        19,
+        20,
+        21,
+        24,
+        28
+      ]
+    },
+    {
+      "ip": "185.220.101.5",
+      "mac": "aa:bb:cc:dd:ee:ff",
+      "role": "external",
+      "packets": 22,
+      "bytes": 1897,
+      "peers": 1,
+      "services": [
+        443,
+        9001
+      ],
+      "protocols": [
+        "tcp"
+      ],
+      "flagged": true,
+      "private": false,
+      "geo": {
+        "ip": "185.220.101.5",
+        "scope": "public",
+        "country": "",
+        "country_code": "",
+        "city": "",
+        "asn": "",
+        "organization": ""
+      },
+      "dns": [],
+      "http": [],
+      "sni": [],
+      "ja3": [],
+      "ja3s": [
+        "1ea9f5ee48f642a7f190cfe16bc3de12"
+      ],
+      "objects": [],
+      "certificates": [
+        {
+          "subject": "update.evil-c2.net",
+          "issuer": "update.evil-c2.net",
+          "self_signed": true,
+          "expired": true,
+          "lifetime_days": 14,
+          "not_after": "2026-08-15T00:00:00+00:00"
+        }
+      ],
+      "sessions": [],
+      "findings": [
+        4,
+        19,
+        20,
+        24,
+        28
+      ]
+    },
+    {
+      "ip": "192.168.1.50",
+      "mac": "00:1a:2b:00:00:bb",
+      "role": "endpoint",
+      "packets": 22,
+      "bytes": 1772,
+      "peers": 4,
+      "services": [],
+      "protocols": [
+        "tcp",
+        "udp"
+      ],
+      "flagged": true,
+      "private": true,
+      "geo": {
+        "ip": "192.168.1.50",
+        "scope": "private",
+        "country": "",
+        "country_code": "",
+        "city": "",
+        "asn": "",
+        "organization": ""
+      },
+      "dns": [
+        {
+          "name": "cdn.example.com",
+          "type": "A"
+        },
+        {
+          "name": "api.example.com",
+          "type": "A"
+        },
+        {
+          "name": "www.example.com",
+          "type": "A"
+        }
+      ],
+      "http": [
+        {
+          "method": "GET",
+          "host": "nas.local",
+          "path": "/admin/config",
+          "creds": "admin:password123"
+        }
+      ],
+      "sni": [
+        "cdn.example.com"
+      ],
+      "ja3": [
+        "e4038a8939cf6b4835bc62bd78e4e818"
+      ],
+      "ja3s": [],
+      "objects": [],
+      "certificates": [],
+      "sessions": [
+        {
+          "protocol": "FTP",
+          "detail": "username=ftpadmin, password=Sup3rSecret"
+        }
+      ],
+      "findings": [
+        0,
+        1
+      ]
+    },
+    {
+      "ip": "93.184.216.34",
+      "mac": "aa:bb:cc:dd:ee:ff",
+      "role": "external",
+      "packets": 9,
+      "bytes": 897,
+      "peers": 1,
+      "services": [
+        443
+      ],
+      "protocols": [
+        "tcp"
+      ],
+      "flagged": false,
+      "private": false,
+      "geo": {
+        "ip": "93.184.216.34",
+        "scope": "public",
+        "country": "",
+        "country_code": "",
+        "city": "",
+        "asn": "",
+        "organization": ""
+      },
+      "dns": [],
+      "http": [],
+      "sni": [],
+      "ja3": [],
+      "ja3s": [
+        "1ea9f5ee48f642a7f190cfe16bc3de12"
+      ],
+      "objects": [],
+      "certificates": [],
+      "sessions": [],
+      "findings": []
+    },
+    {
+      "ip": "192.168.1.60",
+      "mac": "aa:bb:cc:dd:ee:ff",
+      "role": "endpoint",
+      "packets": 4,
+      "bytes": 893,
+      "peers": 1,
+      "services": [],
+      "protocols": [
+        "tcp"
+      ],
+      "flagged": false,
+      "private": true,
+      "geo": {
+        "ip": "192.168.1.60",
+        "scope": "private",
+        "country": "",
+        "country_code": "",
+        "city": "",
+        "asn": "",
+        "organization": ""
+      },
+      "dns": [],
+      "http": [
+        {
+          "method": "GET",
+          "host": "mirror.example",
+          "path": "/tools/agent.exe",
+          "creds": ""
+        }
+      ],
+      "sni": [],
+      "ja3": [],
+      "ja3s": [],
+      "objects": [],
+      "certificates": [],
+      "sessions": [],
+      "findings": []
+    },
+    {
+      "ip": "198.51.100.7",
+      "mac": "aa:bb:cc:dd:ee:ff",
+      "role": "external",
+      "packets": 4,
+      "bytes": 893,
+      "peers": 1,
+      "services": [
+        80
+      ],
+      "protocols": [
+        "tcp"
+      ],
+      "flagged": false,
+      "private": false,
+      "geo": {
+        "ip": "198.51.100.7",
+        "scope": "private",
+        "country": "",
+        "country_code": "",
+        "city": "",
+        "asn": "",
+        "organization": ""
+      },
+      "dns": [],
+      "http": [],
+      "sni": [],
+      "ja3": [],
+      "ja3s": [],
+      "objects": [
+        {
+          "kind": "response",
+          "method": "",
+          "host": "",
+          "path": "",
+          "filename": "agent.exe",
+          "content_type": "application/octet-stream",
+          "declared_bytes": 543,
+          "truncated": false,
+          "sha256": "2eabd193d93d81cbd4805456fb3d24cbf609f8d4e13944670a07eb53736f59ec",
+          "body_kind": "binary",
+          "preview": "4d5a9000030000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+        }
+      ],
+      "certificates": [],
+      "sessions": [],
+      "findings": []
+    },
+    {
+      "ip": "192.168.1.20",
+      "mac": "00:1a:2b:00:00:aa",
+      "role": "server",
+      "packets": 12,
+      "bytes": 800,
+      "peers": 3,
+      "services": [
+        80,
+        445
+      ],
+      "protocols": [
+        "tcp"
+      ],
+      "flagged": true,
+      "private": true,
+      "geo": {
+        "ip": "192.168.1.20",
+        "scope": "private",
+        "country": "",
+        "country_code": "",
+        "city": "",
+        "asn": "",
+        "organization": ""
+      },
+      "dns": [],
+      "http": [],
+      "sni": [],
+      "ja3": [],
+      "ja3s": [],
+      "objects": [],
+      "certificates": [],
+      "sessions": [],
+      "findings": [
+        0,
+        5
+      ]
+    },
+    {
+      "ip": "192.168.1.10",
+      "mac": "aa:bb:cc:dd:ee:ff",
+      "role": "server",
+      "packets": 6,
+      "bytes": 401,
+      "peers": 1,
+      "services": [
+        445,
+        3389
+      ],
+      "protocols": [
+        "tcp"
+      ],
+      "flagged": true,
+      "private": true,
+      "geo": {
+        "ip": "192.168.1.10",
+        "scope": "private",
+        "country": "",
+        "country_code": "",
+        "city": "",
+        "asn": "",
+        "organization": ""
+      },
+      "dns": [],
+      "http": [],
+      "sni": [],
+      "ja3": [],
+      "ja3s": [],
+      "objects": [],
+      "certificates": [],
+      "sessions": [],
+      "findings": [
+        12
+      ]
+    },
+    {
+      "ip": "192.168.1.11",
+      "mac": "aa:bb:cc:dd:ee:ff",
+      "role": "server",
+      "packets": 6,
+      "bytes": 401,
+      "peers": 1,
+      "services": [
+        445,
+        3389
+      ],
+      "protocols": [
+        "tcp"
+      ],
+      "flagged": true,
+      "private": true,
+      "geo": {
+        "ip": "192.168.1.11",
+        "scope": "private",
+        "country": "",
+        "country_code": "",
+        "city": "",
+        "asn": "",
+        "organization": ""
+      },
+      "dns": [],
+      "http": [],
+      "sni": [],
+      "ja3": [],
+      "ja3s": [],
+      "objects": [],
+      "certificates": [],
+      "sessions": [],
+      "findings": [
+        13
+      ]
+    },
+    {
+      "ip": "192.168.1.12",
+      "mac": "aa:bb:cc:dd:ee:ff",
+      "role": "server",
+      "packets": 6,
+      "bytes": 401,
+      "peers": 1,
+      "services": [
+        445,
+        3389
+      ],
+      "protocols": [
+        "tcp"
+      ],
+      "flagged": true,
+      "private": true,
+      "geo": {
+        "ip": "192.168.1.12",
+        "scope": "private",
+        "country": "",
+        "country_code": "",
+        "city": "",
+        "asn": "",
+        "organization": ""
+      },
+      "dns": [],
+      "http": [],
+      "sni": [],
+      "ja3": [],
+      "ja3s": [],
+      "objects": [],
+      "certificates": [],
+      "sessions": [],
+      "findings": [
+        14
+      ]
+    },
+    {
+      "ip": "192.168.1.13",
+      "mac": "aa:bb:cc:dd:ee:ff",
+      "role": "server",
+      "packets": 6,
+      "bytes": 401,
+      "peers": 1,
+      "services": [
+        445,
+        3389
+      ],
+      "protocols": [
+        "tcp"
+      ],
+      "flagged": true,
+      "private": true,
+      "geo": {
+        "ip": "192.168.1.13",
+        "scope": "private",
+        "country": "",
+        "country_code": "",
+        "city": "",
+        "asn": "",
+        "organization": ""
+      },
+      "dns": [],
+      "http": [],
+      "sni": [],
+      "ja3": [],
+      "ja3s": [],
+      "objects": [],
+      "certificates": [],
+      "sessions": [],
+      "findings": [
+        15
+      ]
+    },
+    {
+      "ip": "192.168.1.61",
+      "mac": "aa:bb:cc:dd:ee:ff",
+      "role": "endpoint",
+      "packets": 3,
+      "bytes": 341,
+      "peers": 1,
+      "services": [],
+      "protocols": [
+        "tcp"
+      ],
+      "flagged": true,
+      "private": true,
+      "geo": {
+        "ip": "192.168.1.61",
+        "scope": "private",
+        "country": "",
+        "country_code": "",
+        "city": "",
+        "asn": "",
+        "organization": ""
+      },
+      "dns": [],
+      "http": [],
+      "sni": [],
+      "ja3": [],
+      "ja3s": [],
+      "objects": [],
+      "certificates": [],
+      "sessions": [
+        {
+          "protocol": "SIP",
+          "detail": "method=REGISTER, from=<sip:1001@pbx.example>, to=<sip:1001@pbx.example>, user_agent=Grandstream GXP2170, auth_username=1001"
+        }
+      ],
+      "findings": [
+        2
+      ]
+    },
+    {
+      "ip": "192.168.1.90",
+      "mac": "aa:bb:cc:dd:ee:ff",
+      "role": "endpoint",
+      "packets": 6,
+      "bytes": 332,
+      "peers": 1,
+      "services": [],
+      "protocols": [
+        "tcp"
+      ],
+      "flagged": false,
+      "private": true,
+      "geo": {
+        "ip": "192.168.1.90",
+        "scope": "private",
+        "country": "",
+        "country_code": "",
+        "city": "",
+        "asn": "",
+        "organization": ""
+      },
+      "dns": [],
+      "http": [
+        {
+          "method": "GET",
+          "host": "intranet.local",
+          "path": "/health",
+          "creds": ""
+        }
+      ],
+      "sni": [],
+      "ja3": [],
+      "ja3s": [],
+      "objects": [],
+      "certificates": [],
+      "sessions": [],
+      "findings": []
+    },
+    {
+      "ip": "192.168.1.100",
+      "mac": "aa:bb:cc:dd:ee:ff",
+      "role": "endpoint",
+      "packets": 1,
+      "bytes": 300,
+      "peers": 1,
+      "services": [],
+      "protocols": [
+        "udp"
+      ],
+      "flagged": false,
+      "private": true,
+      "geo": {
+        "ip": "192.168.1.100",
+        "scope": "private",
+        "country": "",
+        "country_code": "",
+        "city": "",
+        "asn": "",
+        "organization": ""
+      },
+      "dns": [],
+      "http": [],
+      "sni": [],
+      "ja3": [],
+      "ja3s": [],
+      "objects": [],
+      "certificates": [],
+      "sessions": [
+        {
+          "protocol": "DHCP",
+          "detail": "client_mac=00:1a:2b:00:00:99, message_type=REQUEST, hostname=WKS-1234, requested_ip=192.168.1.100"
+        }
+      ],
+      "findings": []
+    },
+    {
+      "ip": "192.168.1.62",
+      "mac": "aa:bb:cc:dd:ee:ff",
+      "role": "endpoint",
+      "packets": 3,
+      "bytes": 241,
+      "peers": 1,
+      "services": [],
+      "protocols": [
+        "tcp"
+      ],
+      "flagged": true,
+      "private": true,
+      "geo": {
+        "ip": "192.168.1.62",
+        "scope": "private",
+        "country": "",
+        "country_code": "",
+        "city": "",
+        "asn": "",
+        "organization": ""
+      },
+      "dns": [],
+      "http": [],
+      "sni": [],
+      "ja3": [],
+      "ja3s": [],
+      "objects": [],
+      "certificates": [],
+      "sessions": [
+        {
+          "protocol": "SMTP",
+          "detail": "rcpt=['<[email protected]>'], from=<[email protected]>"
+        }
+      ],
+      "findings": [
+        3
+      ]
+    },
+    {
+      "ip": "203.0.113.25",
+      "mac": "aa:bb:cc:dd:ee:ff",
+      "role": "external",
+      "packets": 3,
+      "bytes": 241,
+      "peers": 1,
+      "services": [
+        587
+      ],
+      "protocols": [
+        "tcp"
+      ],
+      "flagged": true,
+      "private": false,
+      "geo": {
+        "ip": "203.0.113.25",
+        "scope": "private",
+        "country": "",
+        "country_code": "",
+        "city": "",
+        "asn": "",
+        "organization": ""
+      },
+      "dns": [],
+      "http": [],
+      "sni": [],
+      "ja3": [],
+      "ja3s": [],
+      "objects": [],
+      "certificates": [],
+      "sessions": [],
+      "findings": [
+        3
+      ]
+    },
+    {
+      "ip": "192.168.1.101",
+      "mac": "aa:bb:cc:dd:ee:ff",
+      "role": "endpoint",
+      "packets": 3,
+      "bytes": 224,
+      "peers": 1,
+      "services": [],
+      "protocols": [
+        "tcp"
+      ],
+      "flagged": true,
+      "private": true,
+      "geo": {
+        "ip": "192.168.1.101",
+        "scope": "private",
+        "country": "",
+        "country_code": "",
+        "city": "",
+        "asn": "",
+        "organization": ""
+      },
+      "dns": [],
+      "http": [],
+      "sni": [],
+      "ja3": [],
+      "ja3s": [],
+      "objects": [],
+      "certificates": [],
+      "sessions": [
+        {
+          "protocol": "NTLM",
+          "detail": "ntlmssp=AUTHENTICATE, domain=CORP, user=jdoe, host=WKS-1234"
+        }
+      ],
+      "findings": [
+        5
+      ]
+    },
+    {
+      "ip": "192.168.1.30",
+      "mac": "aa:bb:cc:dd:ee:ff",
+      "role": "endpoint",
+      "packets": 4,
+      "bytes": 193,
+      "peers": 1,
+      "services": [
+        21
+      ],
+      "protocols": [
+        "tcp"
+      ],
+      "flagged": true,
+      "private": true,
+      "geo": {
+        "ip": "192.168.1.30",
+        "scope": "private",
+        "country": "",
+        "country_code": "",
+        "city": "",
+        "asn": "",
+        "organization": ""
+      },
+      "dns": [],
+      "http": [],
+      "sni": [],
+      "ja3": [],
+      "ja3s": [],
+      "objects": [],
+      "certificates": [],
+      "sessions": [],
+      "findings": [
+        1
+      ]
+    },
+    {
+      "ip": "192.168.1.14",
+      "mac": "aa:bb:cc:dd:ee:ff",
+      "role": "endpoint",
+      "packets": 3,
+      "bytes": 164,
+      "peers": 1,
+      "services": [
+        4444
+      ],
+      "protocols": [
+        "tcp"
+      ],
+      "flagged": true,
+      "private": true,
+      "geo": {
+        "ip": "192.168.1.14",
+        "scope": "private",
+        "country": "",
+        "country_code": "",
+        "city": "",
+        "asn": "",
+        "organization": ""
+      },
+      "dns": [],
+      "http": [],
+      "sni": [],
+      "ja3": [],
+      "ja3s": [],
+      "objects": [],
+      "certificates": [],
+      "sessions": [],
+      "findings": [
+        18,
+        27
+      ]
+    },
+    {
+      "ip": "192.168.1.104",
+      "mac": "aa:bb:cc:dd:ee:ff",
+      "role": "endpoint",
+      "packets": 3,
+      "bytes": 157,
+      "peers": 1,
+      "services": [],
+      "protocols": [
+        "tcp"
+      ],
+      "flagged": true,
+      "private": true,
+      "geo": {
+        "ip": "192.168.1.104",
+        "scope": "private",
+        "country": "",
+        "country_code": "",
+        "city": "",
+        "asn": "",
+        "organization": ""
+      },
+      "dns": [],
+      "http": [],
+      "sni": [],
+      "ja3": [],
+      "ja3s": [],
+      "objects": [],
+      "certificates": [],
+      "sessions": [
+        {
+          "protocol": "Telnet",
+          "detail": "protocol_detail=telnet session, username=operator"
+        }
+      ],
+      "findings": [
+        7
+      ]
+    },
+    {
+      "ip": "192.168.1.41",
+      "mac": "aa:bb:cc:dd:ee:ff",
+      "role": "endpoint",
+      "packets": 3,
+      "bytes": 157,
+      "peers": 1,
+      "services": [
+        23
+      ],
+      "protocols": [
+        "tcp"
+      ],
+      "flagged": true,
+      "private": true,
+      "geo": {
+        "ip": "192.168.1.41",
+        "scope": "private",
+        "country": "",
+        "country_code": "",
+        "city": "",
+        "asn": "",
+        "organization": ""
+      },
+      "dns": [],
+      "http": [],
+      "sni": [],
+      "ja3": [],
+      "ja3s": [],
+      "objects": [],
+      "certificates": [],
+      "sessions": [],
+      "findings": [
+        7
+      ]
+    },
+    {
+      "ip": "192.168.1.102",
+      "mac": "aa:bb:cc:dd:ee:ff",
+      "role": "endpoint",
+      "packets": 3,
+      "bytes": 148,
+      "peers": 1,
+      "services": [],
+      "protocols": [
+        "tcp"
+      ],
+      "flagged": true,
+      "private": true,
+      "geo": {
+        "ip": "192.168.1.102",
+        "scope": "private",
+        "country": "",
+        "country_code": "",
+        "city": "",
+        "asn": "",
+        "organization": ""
+      },
+      "dns": [],
+      "http": [],
+      "sni": [],
+      "ja3": [],
+      "ja3s": [],
+      "objects": [],
+      "certificates": [],
+      "sessions": [
+        {
+          "protocol": "LDAP",
+          "detail": "operation=bindRequest, bind_dn=cn=admin,dc=corp"
+        }
+      ],
+      "findings": [
+        6
+      ]
+    },
+    {
+      "ip": "192.168.1.103",
+      "mac": "aa:bb:cc:dd:ee:ff",
+      "role": "endpoint",
+      "packets": 3,
+      "bytes": 141,
+      "peers": 1,
+      "services": [],
+      "protocols": [
+        "tcp"
+      ],
+      "flagged": true,
+      "private": true,
+      "geo": {
+        "ip": "192.168.1.103",
+        "scope": "private",
+        "country": "",
+        "country_code": "",
+        "city": "",
+        "asn": "",
+        "organization": ""
+      },
+      "dns": [],
+      "http": [],
+      "sni": [],
+      "ja3": [],
+      "ja3s": [],
+      "objects": [],
+      "certificates": [],
+      "sessions": [],
+      "findings": [
+        29
+      ]
+    },
+    {
+      "ip": "192.168.1.40",
+      "mac": "aa:bb:cc:dd:ee:ff",
+      "role": "endpoint",
+      "packets": 3,
+      "bytes": 141,
+      "peers": 1,
+      "services": [
+        22
+      ],
+      "protocols": [
+        "tcp"
+      ],
+      "flagged": true,
+      "private": true,
+      "geo": {
+        "ip": "192.168.1.40",
+        "scope": "private",
+        "country": "",
+        "country_code": "",
+        "city": "",
+        "asn": "",
+        "organization": ""
+      },
+      "dns": [],
+      "http": [],
+      "sni": [],
+      "ja3": [],
+      "ja3s": [],
+      "objects": [],
+      "certificates": [],
+      "sessions": [
+        {
+          "protocol": "SSH",
+          "detail": "banner=SSH-2.0-OpenSSH_9.6"
+        }
+      ],
+      "findings": [
+        29
+      ]
+    },
+    {
+      "ip": "192.168.1.105",
+      "mac": "aa:bb:cc:dd:ee:ff",
+      "role": "endpoint",
+      "packets": 1,
+      "bytes": 80,
+      "peers": 1,
+      "services": [],
+      "protocols": [
+        "udp"
+      ],
+      "flagged": true,
+      "private": true,
+      "geo": {
+        "ip": "192.168.1.105",
+        "scope": "private",
+        "country": "",
+        "country_code": "",
+        "city": "",
+        "asn": "",
+        "organization": ""
+      },
+      "dns": [],
+      "http": [],
+      "sni": [],
+      "ja3": [],
+      "ja3s": [],
+      "objects": [],
+      "certificates": [],
+      "sessions": [
+        {
+          "protocol": "SNMP",
+          "detail": "community=public"
+        }
+      ],
+      "findings": [
+        8
+      ]
+    },
+    {
+      "ip": "192.168.1.42",
+      "mac": "aa:bb:cc:dd:ee:ff",
+      "role": "endpoint",
+      "packets": 1,
+      "bytes": 80,
+      "peers": 1,
+      "services": [],
+      "protocols": [
+        "udp"
+      ],
+      "flagged": true,
+      "private": true,
+      "geo": {
+        "ip": "192.168.1.42",
+        "scope": "private",
+        "country": "",
+        "country_code": "",
+        "city": "",
+        "asn": "",
+        "organization": ""
+      },
+      "dns": [],
+      "http": [],
+      "sni": [],
+      "ja3": [],
+      "ja3s": [],
+      "objects": [],
+      "certificates": [],
+      "sessions": [],
+      "findings": [
+        8
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "a": "192.168.1.1",
+      "b": "192.168.1.50",
+      "bytes": 438,
+      "packets": 6,
+      "suspicious": false
+    },
+    {
+      "a": "192.168.1.50",
+      "b": "93.184.216.34",
+      "bytes": 897,
+      "packets": 9,
+      "suspicious": false
+    },
+    {
+      "a": "192.168.1.20",
+      "b": "192.168.1.50",
+      "bytes": 244,
+      "packets": 3,
+      "suspicious": true
+    },
+    {
+      "a": "192.168.1.30",
+      "b": "192.168.1.50",
+      "bytes": 193,
+      "packets": 4,
+      "suspicious": true
+    },
+    {
+      "a": "192.168.1.55",
+      "b": "203.0.113.9",
+      "bytes": 1337407,
+      "packets": 931,
+      "suspicious": true
+    },
+    {
+      "a": "192.168.1.60",
+      "b": "198.51.100.7",
+      "bytes": 893,
+      "packets": 4,
+      "suspicious": false
+    },
+    {
+      "a": "192.168.1.5",
+      "b": "192.168.1.61",
+      "bytes": 341,
+      "packets": 3,
+      "suspicious": true
+    },
+    {
+      "a": "192.168.1.62",
+      "b": "203.0.113.25",
+      "bytes": 241,
+      "packets": 3,
+      "suspicious": true
+    },
+    {
+      "a": "192.168.1.10",
+      "b": "192.168.1.66",
+      "bytes": 401,
+      "packets": 6,
+      "suspicious": true
+    },
+    {
+      "a": "192.168.1.11",
+      "b": "192.168.1.66",
+      "bytes": 401,
+      "packets": 6,
+      "suspicious": true
+    },
+    {
+      "a": "192.168.1.12",
+      "b": "192.168.1.66",
+      "bytes": 401,
+      "packets": 6,
+      "suspicious": true
+    },
+    {
+      "a": "192.168.1.13",
+      "b": "192.168.1.66",
+      "bytes": 401,
+      "packets": 6,
+      "suspicious": true
+    },
+    {
+      "a": "192.168.1.5",
+      "b": "192.168.1.66",
+      "bytes": 1980,
+      "packets": 36,
+      "suspicious": true
+    },
+    {
+      "a": "192.168.1.14",
+      "b": "192.168.1.66",
+      "bytes": 164,
+      "packets": 3,
+      "suspicious": true
+    },
+    {
+      "a": "185.220.101.5",
+      "b": "192.168.1.77",
+      "bytes": 1897,
+      "packets": 22,
+      "suspicious": true
+    },
+    {
+      "a": "192.168.1.20",
+      "b": "192.168.1.90",
+      "bytes": 332,
+      "packets": 6,
+      "suspicious": false
+    },
+    {
+      "a": "192.168.1.1",
+      "b": "192.168.1.100",
+      "bytes": 300,
+      "packets": 1,
+      "suspicious": false
+    },
+    {
+      "a": "192.168.1.101",
+      "b": "192.168.1.20",
+      "bytes": 224,
+      "packets": 3,
+      "suspicious": true
+    },
+    {
+      "a": "192.168.1.102",
+      "b": "192.168.1.5",
+      "bytes": 148,
+      "packets": 3,
+      "suspicious": true
+    },
+    {
+      "a": "192.168.1.103",
+      "b": "192.168.1.40",
+      "bytes": 141,
+      "packets": 3,
+      "suspicious": true
+    },
+    {
+      "a": "192.168.1.104",
+      "b": "192.168.1.41",
+      "bytes": 157,
+      "packets": 3,
+      "suspicious": true
+    },
+    {
+      "a": "192.168.1.105",
+      "b": "192.168.1.42",
+      "bytes": 80,
+      "packets": 1,
+      "suspicious": true
+    },
+    {
+      "a": "192.168.1.1",
+      "b": "192.168.1.66",
+      "bytes": 800,
+      "packets": 20,
+      "suspicious": true
+    },
+    {
+      "a": "192.168.1.1",
+      "b": "192.168.1.88",
+      "bytes": 2625,
+      "packets": 25,
+      "suspicious": false
+    }
+  ],
+  "events": [
+    {
+      "t": 2.8,
+      "severity": "critical",
+      "detector": "plaintext_credentials",
+      "title": "Credentials sent in the clear",
+      "summary": "HTTP Basic login 'admin' / 'password123' to nas.local",
+      "src": "192.168.1.50",
+      "dst": "192.168.1.20",
+      "technique": "T1040",
+      "evidence": {
+        "username": "admin",
+        "password": "password123",
+        "protocol": "HTTP Basic",
+        "target": "nas.local"
+      }
+    },
+    {
+      "t": 3.3,
+      "severity": "critical",
+      "detector": "plaintext_credentials",
+      "title": "Credentials sent in the clear",
+      "summary": "FTP login 'ftpadmin' / 'Sup3rSecret' to 192.168.1.30",
+      "src": "192.168.1.50",
+      "dst": "192.168.1.30",
+      "technique": "T1040",
+      "evidence": {
+        "username": "ftpadmin",
+        "password": "Sup3rSecret",
+        "protocol": "FTP",
+        "target": "192.168.1.30"
+      }
+    },
+    {
+      "t": 5.519,
+      "severity": "critical",
+      "detector": "plaintext_credentials",
+      "title": "Credentials sent in the clear",
+      "summary": "SIP login '1001' to pbx.example",
+      "src": "192.168.1.61",
+      "dst": "192.168.1.5",
+      "technique": "T1040",
+      "evidence": {
+        "username": "1001",
+        "password": "",
+        "protocol": "SIP",
+        "target": "pbx.example"
+      }
+    },
+    {
+      "t": 5.889,
+      "severity": "critical",
+      "detector": "plaintext_credentials",
+      "title": "Credentials sent in the clear",
+      "summary": "SMTP login '[email protected]' / 'hunter2' to 203.0.113.25",
+      "src": "192.168.1.62",
+      "dst": "203.0.113.25",
+      "technique": "T1040",
+      "evidence": {
+        "username": "[email protected]",
+        "password": "hunter2",
+        "protocol": "SMTP",
+        "target": "203.0.113.25"
+      }
+    },
+    {
+      "t": 8.009,
+      "severity": "critical",
+      "detector": "ioc_match",
+      "title": "Traffic to a known-bad host",
+      "summary": "contact with flagged address 185.220.101.5",
+      "src": "192.168.1.77",
+      "dst": "185.220.101.5",
+      "technique": "T1071",
+      "evidence": {
+        "indicator": "185.220.101.5",
+        "type": "ip",
+        "feed": "example-iocs.json"
+      }
+    },
+    {
+      "t": 9.189,
+      "severity": "critical",
+      "detector": "plaintext_credentials",
+      "title": "Credentials sent in the clear",
+      "summary": "NTLM login 'CORP\\jdoe' to 192.168.1.20",
+      "src": "192.168.1.101",
+      "dst": "192.168.1.20",
+      "technique": "T1040",
+      "evidence": {
+        "username": "CORP\\jdoe",
+        "password": "",
+        "protocol": "NTLM",
+        "target": "192.168.1.20"
+      }
+    },
+    {
+      "t": 9.429,
+      "severity": "critical",
+      "detector": "plaintext_credentials",
+      "title": "Credentials sent in the clear",
+      "summary": "LDAP login 'cn=admin,dc=corp' to 192.168.1.5",
+      "src": "192.168.1.102",
+      "dst": "192.168.1.5",
+      "technique": "T1040",
+      "evidence": {
+        "username": "cn=admin,dc=corp",
+        "password": "",
+        "protocol": "LDAP",
+        "target": "192.168.1.5"
+      }
+    },
+    {
+      "t": 9.909,
+      "severity": "critical",
+      "detector": "plaintext_credentials",
+      "title": "Credentials sent in the clear",
+      "summary": "Telnet login 'operator' to 192.168.1.41",
+      "src": "192.168.1.104",
+      "dst": "192.168.1.41",
+      "technique": "T1040",
+      "evidence": {
+        "username": "operator",
+        "password": "",
+        "protocol": "Telnet",
+        "target": "192.168.1.41"
+      }
+    },
+    {
+      "t": 10.109,
+      "severity": "critical",
+      "detector": "plaintext_credentials",
+      "title": "Credentials sent in the clear",
+      "summary": "SNMP community login 'public' to 192.168.1.42",
+      "src": "192.168.1.105",
+      "dst": "192.168.1.42",
+      "technique": "T1040",
+      "evidence": {
+        "username": "public",
+        "password": "",
+        "protocol": "SNMP community",
+        "target": "192.168.1.42"
+      }
+    },
+    {
+      "t": 3.801,
+      "severity": "high",
+      "detector": "data_exfiltration",
+      "title": "Large outbound data transfer",
+      "summary": "192.168.1.55 uploaded 1.2 MB to 203.0.113.9 over cleartext HTTP (incl. payroll.csv)",
+      "src": "192.168.1.55",
+      "dst": "203.0.113.9",
+      "technique": "T1048",
+      "evidence": {
+        "bytes": 1300000,
+        "objects": 1,
+        "filenames": [
+          "payroll.csv"
+        ]
+      }
+    },
+    {
+      "t": 6.129,
+      "severity": "high",
+      "detector": "lateral_movement",
+      "title": "Possible lateral movement",
+      "summary": "192.168.1.66 opened RDP to 5 internal hosts (192.168.1.10, 192.168.1.11, 192.168.1.12, 192.168.1.13, 192.168.1.14)",
+      "src": "192.168.1.66",
+      "dst": "",
+      "technique": "T1021",
+      "evidence": {
+        "service": "rdp",
+        "targets": [
+          "192.168.1.10",
+          "192.168.1.11",
+          "192.168.1.12",
+          "192.168.1.13",
+          "192.168.1.14"
+        ],
+        "target_count": 5
+      }
+    },
+    {
+      "t": 6.189,
+      "severity": "high",
+      "detector": "lateral_movement",
+      "title": "Possible lateral movement",
+      "summary": "192.168.1.66 opened SMB to 4 internal hosts (192.168.1.10, 192.168.1.11, 192.168.1.12, 192.168.1.13)",
+      "src": "192.168.1.66",
+      "dst": "",
+      "technique": "T1021",
+      "evidence": {
+        "service": "smb",
+        "targets": [
+          "192.168.1.10",
+          "192.168.1.11",
+          "192.168.1.12",
+          "192.168.1.13"
+        ],
+        "target_count": 4
+      }
+    },
+    {
+      "t": 6.189,
+      "severity": "high",
+      "detector": "admin_share_access",
+      "title": "Administrative share access",
+      "summary": "192.168.1.66 accessed \\\\192.168.1.10\\ADMIN$ on 192.168.1.10",
+      "src": "192.168.1.66",
+      "dst": "192.168.1.10",
+      "technique": "T1021.002",
+      "evidence": {
+        "share": "\\\\192.168.1.10\\ADMIN$"
+      }
+    },
+    {
+      "t": 6.489,
+      "severity": "high",
+      "detector": "admin_share_access",
+      "title": "Administrative share access",
+      "summary": "192.168.1.66 accessed \\\\192.168.1.11\\ADMIN$ on 192.168.1.11",
+      "src": "192.168.1.66",
+      "dst": "192.168.1.11",
+      "technique": "T1021.002",
+      "evidence": {
+        "share": "\\\\192.168.1.11\\ADMIN$"
+      }
+    },
+    {
+      "t": 6.789,
+      "severity": "high",
+      "detector": "admin_share_access",
+      "title": "Administrative share access",
+      "summary": "192.168.1.66 accessed \\\\192.168.1.12\\ADMIN$ on 192.168.1.12",
+      "src": "192.168.1.66",
+      "dst": "192.168.1.12",
+      "technique": "T1021.002",
+      "evidence": {
+        "share": "\\\\192.168.1.12\\ADMIN$"
+      }
+    },
+    {
+      "t": 7.089,
+      "severity": "high",
+      "detector": "admin_share_access",
+      "title": "Administrative share access",
+      "summary": "192.168.1.66 accessed \\\\192.168.1.13\\ADMIN$ on 192.168.1.13",
+      "src": "192.168.1.66",
+      "dst": "192.168.1.13",
+      "technique": "T1021.002",
+      "evidence": {
+        "share": "\\\\192.168.1.13\\ADMIN$"
+      }
+    },
+    {
+      "t": 7.109,
+      "severity": "high",
+      "detector": "beaconing",
+      "title": "Periodic beaconing",
+      "summary": "192.168.1.66 called 192.168.1.5:88 every ~0s, 12 times",
+      "src": "192.168.1.66",
+      "dst": "192.168.1.5",
+      "technique": "T1071",
+      "evidence": {
+        "interval_s": 0.0,
+        "hits": 12,
+        "jitter": 0.0
+      }
+    },
+    {
+      "t": 7.129,
+      "severity": "high",
+      "detector": "kerberoasting",
+      "title": "Possible Kerberoasting",
+      "summary": "192.168.1.66 requested 12 Kerberos service tickets from 192.168.1.5",
+      "src": "192.168.1.66",
+      "dst": "192.168.1.5",
+      "technique": "T1558.003",
+      "evidence": {
+        "tgs_requests": 12
+      }
+    },
+    {
+      "t": 7.769,
+      "severity": "high",
+      "detector": "anonymizer",
+      "title": "Connection to anonymising network",
+      "summary": "192.168.1.66 connected to 192.168.1.14:4444 (common C2 port)",
+      "src": "192.168.1.66",
+      "dst": "192.168.1.14",
+      "technique": "T1090.003",
+      "evidence": {
+        "reason": "common C2 port",
+        "port": 4444
+      }
+    },
+    {
+      "t": 8.009,
+      "severity": "high",
+      "detector": "anonymizer",
+      "title": "Connection to anonymising network",
+      "summary": "192.168.1.77 connected to 185.220.101.5:9001 (Tor ORPort)",
+      "src": "192.168.1.77",
+      "dst": "185.220.101.5",
+      "technique": "T1090.003",
+      "evidence": {
+        "reason": "Tor ORPort",
+        "port": 9001
+      }
+    },
+    {
+      "t": 8.229,
+      "severity": "high",
+      "detector": "beaconing",
+      "title": "Periodic beaconing",
+      "summary": "192.168.1.77 called 185.220.101.5:443 every ~30s, 9 times",
+      "src": "192.168.1.77",
+      "dst": "185.220.101.5",
+      "technique": "T1071",
+      "evidence": {
+        "interval_s": 29.8,
+        "hits": 9,
+        "jitter": 0.032
+      }
+    },
+    {
+      "t": 8.229,
+      "severity": "high",
+      "detector": "ioc_match",
+      "title": "TLS connection to a known-bad domain",
+      "summary": "192.168.1.77 reached update.evil-c2.net over TLS",
+      "src": "192.168.1.77",
+      "dst": "",
+      "technique": "T1071",
+      "evidence": {
+        "indicator": "evil-c2.net",
+        "type": "domain",
+        "feed": "example-iocs.json"
+      }
+    },
+    {
+      "t": 10.129,
+      "severity": "high",
+      "detector": "port_scan",
+      "title": "TCP port scan",
+      "summary": "192.168.1.66 probed 20 ports on 192.168.1.1",
+      "src": "192.168.1.66",
+      "dst": "192.168.1.1",
+      "technique": "T1046",
+      "evidence": {
+        "ports_probed": 20,
+        "sample_ports": [
+          21,
+          22,
+          23,
+          25,
+          53,
+          80,
+          110,
+          135,
+          139,
+          143,
+          443,
+          445
+        ]
+      }
+    },
+    {
+      "t": 10.509,
+      "severity": "high",
+      "detector": "anonymizer",
+      "title": "Connection to anonymising network",
+      "summary": "192.168.1.66 connected to 192.168.1.1:8443 (common C2 port)",
+      "src": "192.168.1.66",
+      "dst": "192.168.1.1",
+      "technique": "T1090.003",
+      "evidence": {
+        "reason": "common C2 port",
+        "port": 8443
+      }
+    },
+    {
+      "t": 39.98,
+      "severity": "high",
+      "detector": "ioc_match",
+      "title": "Known-bad TLS fingerprint",
+      "summary": "192.168.1.77 presented flagged JA3 e5c6ecce5448\u2026",
+      "src": "192.168.1.77",
+      "dst": "185.220.101.5",
+      "technique": "T1071",
+      "evidence": {
+        "indicator": "e5c6ecce54485f312c2d9bb1e54ab124",
+        "type": "ja3",
+        "feed": "example-iocs.json"
+      }
+    },
+    {
+      "t": 247.224,
+      "severity": "high",
+      "detector": "dns_tunneling",
+      "title": "Possible DNS tunneling",
+      "summary": "192.168.1.88 made 25 high-entropy lookups under evil-c2.net",
+      "src": "192.168.1.88",
+      "dst": "",
+      "technique": "T1071.004",
+      "evidence": {
+        "domain": "evil-c2.net",
+        "queries": 25,
+        "avg_entropy": 4.13
+      }
+    },
+    {
+      "t": 247.224,
+      "severity": "high",
+      "detector": "ioc_match",
+      "title": "Lookup of a known-bad domain",
+      "summary": "192.168.1.88 resolved cf10epf91dhodzdoc9is0j8ht9lg.tunnel.evil-c2.net",
+      "src": "192.168.1.88",
+      "dst": "",
+      "technique": "T1071",
+      "evidence": {
+        "indicator": "evil-c2.net",
+        "type": "domain",
+        "feed": "example-iocs.json"
+      }
+    },
+    {
+      "t": 7.809,
+      "severity": "medium",
+      "detector": "port_anomaly",
+      "title": "Service on a non-standard port",
+      "summary": "RDP to 192.168.1.14 on port 4444 (normally 3389)",
+      "src": "192.168.1.66",
+      "dst": "192.168.1.14",
+      "technique": "T1571",
+      "evidence": {
+        "service": "rdp",
+        "port": 4444,
+        "expected": 3389
+      }
+    },
+    {
+      "t": 8.269,
+      "severity": "medium",
+      "detector": "suspicious_certificate",
+      "title": "Suspicious TLS certificate",
+      "summary": "185.220.101.5 served a self-signed and short-lived (14d) certificate (subject update.evil-c2.net)",
+      "src": "192.168.1.77",
+      "dst": "185.220.101.5",
+      "technique": "T1587.003",
+      "evidence": {
+        "subject": "update.evil-c2.net",
+        "issuer": "update.evil-c2.net",
+        "reasons": [
+          "self-signed",
+          "short-lived (14d)"
+        ],
+        "lifetime_days": 14
+      }
+    },
+    {
+      "t": 9.669,
+      "severity": "medium",
+      "detector": "port_anomaly",
+      "title": "Service on a non-standard port",
+      "summary": "SSH to 192.168.1.103 on port 48100 (normally 22)",
+      "src": "192.168.1.40",
+      "dst": "192.168.1.103",
+      "technique": "T1571",
+      "evidence": {
+        "service": "ssh",
+        "port": 48100,
+        "expected": 22
+      }
+    }
+  ],
+  "flows": [
+    {
+      "src": "192.168.1.55",
+      "dst": "203.0.113.9",
+      "sport": 44300,
+      "dport": 80,
+      "proto": "tcp",
+      "service": "http",
+      "packets": 931,
+      "bytes": 1337407,
+      "dur": 1.0
+    },
+    {
+      "src": "192.168.1.1",
+      "dst": "192.168.1.88",
+      "sport": 53,
+      "dport": 52000,
+      "proto": "udp",
+      "service": "dns",
+      "packets": 25,
+      "bytes": 2625,
+      "dur": 7.2
+    },
+    {
+      "src": "185.220.101.5",
+      "dst": "192.168.1.77",
+      "sport": 443,
+      "dport": 49600,
+      "proto": "tcp",
+      "service": "tls",
+      "packets": 3,
+      "bytes": 1012,
+      "dur": 0.0
+    },
+    {
+      "src": "192.168.1.50",
+      "dst": "93.184.216.34",
+      "sport": 44001,
+      "dport": 443,
+      "proto": "tcp",
+      "service": "tls",
+      "packets": 9,
+      "bytes": 897,
+      "dur": 1.5
+    },
+    {
+      "src": "192.168.1.60",
+      "dst": "198.51.100.7",
+      "sport": 44400,
+      "dport": 80,
+      "proto": "tcp",
+      "service": "http",
+      "packets": 4,
+      "bytes": 893,
+      "dur": 0.1
+    },
+    {
+      "src": "192.168.1.1",
+      "dst": "192.168.1.50",
+      "sport": 53,
+      "dport": 51000,
+      "proto": "udp",
+      "service": "dns",
+      "packets": 6,
+      "bytes": 438,
+      "dur": 1.4
+    },
+    {
+      "src": "192.168.1.5",
+      "dst": "192.168.1.61",
+      "sport": 5060,
+      "dport": 45100,
+      "proto": "tcp",
+      "service": "sip",
+      "packets": 3,
+      "bytes": 341,
+      "dur": 0.1
+    },
+    {
+      "src": "192.168.1.20",
+      "dst": "192.168.1.90",
+      "sport": 80,
+      "dport": 47700,
+      "proto": "tcp",
+      "service": "http",
+      "packets": 6,
+      "bytes": 332,
+      "dur": 0.4
+    },
+    {
+      "src": "192.168.1.1",
+      "dst": "192.168.1.100",
+      "sport": 67,
+      "dport": 68,
+      "proto": "udp",
+      "service": "dhcp",
+      "packets": 1,
+      "bytes": 300,
+      "dur": 0.0
+    },
+    {
+      "src": "185.220.101.5",
+      "dst": "192.168.1.77",
+      "sport": 443,
+      "dport": 45000,
+      "proto": "tcp",
+      "service": "tls",
+      "packets": 3,
+      "bytes": 245,
+      "dur": 0.1
+    },
+    {
+      "src": "192.168.1.20",
+      "dst": "192.168.1.50",
+      "sport": 80,
+      "dport": 44100,
+      "proto": "tcp",
+      "service": "http",
+      "packets": 3,
+      "bytes": 244,
+      "dur": 0.1
+    },
+    {
+      "src": "192.168.1.62",
+      "dst": "203.0.113.25",
+      "sport": 45200,
+      "dport": 587,
+      "proto": "tcp",
+      "service": "smtp",
+      "packets": 3,
+      "bytes": 241,
+      "dur": 0.1
+    },
+    {
+      "src": "192.168.1.10",
+      "dst": "192.168.1.66",
+      "sport": 445,
+      "dport": 47000,
+      "proto": "tcp",
+      "service": "smb",
+      "packets": 3,
+      "bytes": 230,
+      "dur": 0.0
+    },
+    {
+      "src": "192.168.1.11",
+      "dst": "192.168.1.66",
+      "sport": 445,
+      "dport": 47001,
+      "proto": "tcp",
+      "service": "smb",
+      "packets": 3,
+      "bytes": 230,
+      "dur": 0.0
+    },
+    {
+      "src": "192.168.1.12",
+      "dst": "192.168.1.66",
+      "sport": 445,
+      "dport": 47002,
+      "proto": "tcp",
+      "service": "smb",
+      "packets": 3,
+      "bytes": 230,
+      "dur": 0.0
+    },
+    {
+      "src": "192.168.1.13",
+      "dst": "192.168.1.66",
+      "sport": 445,
+      "dport": 47003,
+      "proto": "tcp",
+      "service": "smb",
+      "packets": 3,
+      "bytes": 230,
+      "dur": 0.0
+    },
+    {
+      "src": "192.168.1.101",
+      "dst": "192.168.1.20",
+      "sport": 47800,
+      "dport": 445,
+      "proto": "tcp",
+      "service": "ntlm",
+      "packets": 3,
+      "bytes": 224,
+      "dur": 0.0
+    },
+    {
+      "src": "192.168.1.30",
+      "dst": "192.168.1.50",
+      "sport": 21,
+      "dport": 44200,
+      "proto": "tcp",
+      "service": "ftp",
+      "packets": 4,
+      "bytes": 193,
+      "dur": 0.2
+    },
+    {
+      "src": "192.168.1.10",
+      "dst": "192.168.1.66",
+      "sport": 3389,
+      "dport": 46000,
+      "proto": "tcp",
+      "service": "rdp",
+      "packets": 3,
+      "bytes": 171,
+      "dur": 0.0
+    },
+    {
+      "src": "192.168.1.11",
+      "dst": "192.168.1.66",
+      "sport": 3389,
+      "dport": 46001,
+      "proto": "tcp",
+      "service": "rdp",
+      "packets": 3,
+      "bytes": 171,
+      "dur": 0.0
+    },
+    {
+      "src": "192.168.1.12",
+      "dst": "192.168.1.66",
+      "sport": 3389,
+      "dport": 46002,
+      "proto": "tcp",
+      "service": "rdp",
+      "packets": 3,
+      "bytes": 171,
+      "dur": 0.0
+    },
+    {
+      "src": "192.168.1.13",
+      "dst": "192.168.1.66",
+      "sport": 3389,
+      "dport": 46003,
+      "proto": "tcp",
+      "service": "rdp",
+      "packets": 3,
+      "bytes": 171,
+      "dur": 0.0
+    },
+    {
+      "src": "192.168.1.5",
+      "dst": "192.168.1.66",
+      "sport": 88,
+      "dport": 48000,
+      "proto": "tcp",
+      "service": "kerberos",
+      "packets": 3,
+      "bytes": 165,
+      "dur": 0.0
+    },
+    {
+      "src": "192.168.1.5",
+      "dst": "192.168.1.66",
+      "sport": 88,
+      "dport": 48001,
+      "proto": "tcp",
+      "service": "kerberos",
+      "packets": 3,
+      "bytes": 165,
+      "dur": 0.0
+    },
+    {
+      "src": "192.168.1.5",
+      "dst": "192.168.1.66",
+      "sport": 88,
+      "dport": 48002,
+      "proto": "tcp",
+      "service": "kerberos",
+      "packets": 3,
+      "bytes": 165,
+      "dur": 0.0
+    },
+    {
+      "src": "192.168.1.5",
+      "dst": "192.168.1.66",
+      "sport": 88,
+      "dport": 48003,
+      "proto": "tcp",
+      "service": "kerberos",
+      "packets": 3,
+      "bytes": 165,
+      "dur": 0.0
+    },
+    {
+      "src": "192.168.1.5",
+      "dst": "192.168.1.66",
+      "sport": 88,
+      "dport": 48004,
+      "proto": "tcp",
+      "service": "kerberos",
+      "packets": 3,
+      "bytes": 165,
+      "dur": 0.0
+    },
+    {
+      "src": "192.168.1.5",
+      "dst": "192.168.1.66",
+      "sport": 88,
+      "dport": 48005,
+      "proto": "tcp",
+      "service": "kerberos",
+      "packets": 3,
+      "bytes": 165,
+      "dur": 0.0
+    },
+    {
+      "src": "192.168.1.5",
+      "dst": "192.168.1.66",
+      "sport": 88,
+      "dport": 48006,
+      "proto": "tcp",
+      "service": "kerberos",
+      "packets": 3,
+      "bytes": 165,
+      "dur": 0.0
+    },
+    {
+      "src": "192.168.1.5",
+      "dst": "192.168.1.66",
+      "sport": 88,
+      "dport": 48007,
+      "proto": "tcp",
+      "service": "kerberos",
+      "packets": 3,
+      "bytes": 165,
+      "dur": 0.0
+    },
+    {
+      "src": "192.168.1.5",
+      "dst": "192.168.1.66",
+      "sport": 88,
+      "dport": 48008,
+      "proto": "tcp",
+      "service": "kerberos",
+      "packets": 3,
+      "bytes": 165,
+      "dur": 0.0
+    },
+    {
+      "src": "192.168.1.5",
+      "dst": "192.168.1.66",
+      "sport": 88,
+      "dport": 48009,
+      "proto": "tcp",
+      "service": "kerberos",
+      "packets": 3,
+      "bytes": 165,
+      "dur": 0.0
+    },
+    {
+      "src": "192.168.1.5",
+      "dst": "192.168.1.66",
+      "sport": 88,
+      "dport": 48010,
+      "proto": "tcp",
+      "service": "kerberos",
+      "packets": 3,
+      "bytes": 165,
+      "dur": 0.0
+    },
+    {
+      "src": "192.168.1.5",
+      "dst": "192.168.1.66",
+      "sport": 88,
+      "dport": 48011,
+      "proto": "tcp",
+      "service": "kerberos",
+      "packets": 3,
+      "bytes": 165,
+      "dur": 0.0
+    },
+    {
+      "src": "192.168.1.14",
+      "dst": "192.168.1.66",
+      "sport": 4444,
+      "dport": 46500,
+      "proto": "tcp",
+      "service": "rdp",
+      "packets": 3,
+      "bytes": 164,
+      "dur": 0.0
+    },
+    {
+      "src": "192.168.1.104",
+      "dst": "192.168.1.41",
+      "sport": 48200,
+      "dport": 23,
+      "proto": "tcp",
+      "service": "telnet",
+      "packets": 3,
+      "bytes": 157,
+      "dur": 0.0
+    },
+    {
+      "src": "192.168.1.102",
+      "dst": "192.168.1.5",
+      "sport": 47900,
+      "dport": 389,
+      "proto": "tcp",
+      "service": "ldap",
+      "packets": 3,
+      "bytes": 148,
+      "dur": 0.0
+    },
+    {
+      "src": "192.168.1.103",
+      "dst": "192.168.1.40",
+      "sport": 48100,
+      "dport": 22,
+      "proto": "tcp",
+      "service": "ssh",
+      "packets": 3,
+      "bytes": 141,
+      "dur": 0.0
+    },
+    {
+      "src": "185.220.101.5",
+      "dst": "192.168.1.77",
+      "sport": 9001,
+      "dport": 49500,
+      "proto": "tcp",
+      "service": "",
+      "packets": 2,
+      "bytes": 80,
+      "dur": 0.0
+    },
+    {
+      "src": "192.168.1.105",
+      "dst": "192.168.1.42",
+      "sport": 48300,
+      "dport": 161,
+      "proto": "udp",
+      "service": "snmp",
+      "packets": 1,
+      "bytes": 80,
+      "dur": 0.0
+    },
+    {
+      "src": "185.220.101.5",
+      "dst": "192.168.1.77",
+      "sport": 443,
+      "dport": 45001,
+      "proto": "tcp",
+      "service": "tls",
+      "packets": 2,
+      "bytes": 80,
+      "dur": 0.0
+    },
+    {
+      "src": "185.220.101.5",
+      "dst": "192.168.1.77",
+      "sport": 443,
+      "dport": 45002,
+      "proto": "tcp",
+      "service": "tls",
+      "packets": 2,
+      "bytes": 80,
+      "dur": 0.1
+    },
+    {
+      "src": "185.220.101.5",
+      "dst": "192.168.1.77",
+      "sport": 443,
+      "dport": 45003,
+      "proto": "tcp",
+      "service": "tls",
+      "packets": 2,
+      "bytes": 80,
+      "dur": 0.0
+    },
+    {
+      "src": "185.220.101.5",
+      "dst": "192.168.1.77",
+      "sport": 443,
+      "dport": 45004,
+      "proto": "tcp",
+      "service": "tls",
+      "packets": 2,
+      "bytes": 80,
+      "dur": 0.0
+    },
+    {
+      "src": "185.220.101.5",
+      "dst": "192.168.1.77",
+      "sport": 443,
+      "dport": 45005,
+      "proto": "tcp",
+      "service": "tls",
+      "packets": 2,
+      "bytes": 80,
+      "dur": 0.1
+    },
+    {
+      "src": "185.220.101.5",
+      "dst": "192.168.1.77",
+      "sport": 443,
+      "dport": 45006,
+      "proto": "tcp",
+      "service": "tls",
+      "packets": 2,
+      "bytes": 80,
+      "dur": 0.0
+    },
+    {
+      "src": "185.220.101.5",
+      "dst": "192.168.1.77",
+      "sport": 443,
+      "dport": 45007,
+      "proto": "tcp",
+      "service": "tls",
+      "packets": 2,
+      "bytes": 80,
+      "dur": 0.0
+    },
+    {
+      "src": "192.168.1.1",
+      "dst": "192.168.1.66",
+      "sport": 21,
+      "dport": 40000,
+      "proto": "tcp",
+      "service": "ftp",
+      "packets": 1,
+      "bytes": 40,
+      "dur": 0.0
+    },
+    {
+      "src": "192.168.1.1",
+      "dst": "192.168.1.66",
+      "sport": 22,
+      "dport": 40001,
+      "proto": "tcp",
+      "service": "",
+      "packets": 1,
+      "bytes": 40,
+      "dur": 0.0
+    },
+    {
+      "src": "192.168.1.1",
+      "dst": "192.168.1.66",
+      "sport": 23,
+      "dport": 40002,
+      "proto": "tcp",
+      "service": "",
+      "packets": 1,
+      "bytes": 40,
+      "dur": 0.0
+    },
+    {
+      "src": "192.168.1.1",
+      "dst": "192.168.1.66",
+      "sport": 25,
+      "dport": 40003,
+      "proto": "tcp",
+      "service": "",
+      "packets": 1,
+      "bytes": 40,
+      "dur": 0.0
+    },
+    {
+      "src": "192.168.1.1",
+      "dst": "192.168.1.66",
+      "sport": 53,
+      "dport": 40004,
+      "proto": "tcp",
+      "service": "dns",
+      "packets": 1,
+      "bytes": 40,
+      "dur": 0.0
+    },
+    {
+      "src": "192.168.1.1",
+      "dst": "192.168.1.66",
+      "sport": 80,
+      "dport": 40005,
+      "proto": "tcp",
+      "service": "http",
+      "packets": 1,
+      "bytes": 40,
+      "dur": 0.0
+    },
+    {
+      "src": "192.168.1.1",
+      "dst": "192.168.1.66",
+      "sport": 110,
+      "dport": 40006,
+      "proto": "tcp",
+      "service": "",
+      "packets": 1,
+      "bytes": 40,
+      "dur": 0.0
+    },
+    {
+      "src": "192.168.1.1",
+      "dst": "192.168.1.66",
+      "sport": 135,
+      "dport": 40007,
+      "proto": "tcp",
+      "service": "",
+      "packets": 1,
+      "bytes": 40,
+      "dur": 0.0
+    },
+    {
+      "src": "192.168.1.1",
+      "dst": "192.168.1.66",
+      "sport": 139,
+      "dport": 40008,
+      "proto": "tcp",
+      "service": "",
+      "packets": 1,
+      "bytes": 40,
+      "dur": 0.0
+    },
+    {
+      "src": "192.168.1.1",
+      "dst": "192.168.1.66",
+      "sport": 143,
+      "dport": 40009,
+      "proto": "tcp",
+      "service": "",
+      "packets": 1,
+      "bytes": 40,
+      "dur": 0.0
+    },
+    {
+      "src": "192.168.1.1",
+      "dst": "192.168.1.66",
+      "sport": 443,
+      "dport": 40010,
+      "proto": "tcp",
+      "service": "tls",
+      "packets": 1,
+      "bytes": 40,
+      "dur": 0.0
+    },
+    {
+      "src": "192.168.1.1",
+      "dst": "192.168.1.66",
+      "sport": 445,
+      "dport": 40011,
+      "proto": "tcp",
+      "service": "",
+      "packets": 1,
+      "bytes": 40,
+      "dur": 0.0
+    },
+    {
+      "src": "192.168.1.1",
+      "dst": "192.168.1.66",
+      "sport": 993,
+      "dport": 40012,
+      "proto": "tcp",
+      "service": "",
+      "packets": 1,
+      "bytes": 40,
+      "dur": 0.0
+    },
+    {
+      "src": "192.168.1.1",
+      "dst": "192.168.1.66",
+      "sport": 995,
+      "dport": 40013,
+      "proto": "tcp",
+      "service": "",
+      "packets": 1,
+      "bytes": 40,
+      "dur": 0.0
+    },
+    {
+      "src": "192.168.1.1",
+      "dst": "192.168.1.66",
+      "sport": 1433,
+      "dport": 40014,
+      "proto": "tcp",
+      "service": "",
+      "packets": 1,
+      "bytes": 40,
+      "dur": 0.0
+    },
+    {
+      "src": "192.168.1.1",
+      "dst": "192.168.1.66",
+      "sport": 3306,
+      "dport": 40015,
+      "proto": "tcp",
+      "service": "",
+      "packets": 1,
+      "bytes": 40,
+      "dur": 0.0
+    },
+    {
+      "src": "192.168.1.1",
+      "dst": "192.168.1.66",
+      "sport": 3389,
+      "dport": 40016,
+      "proto": "tcp",
+      "service": "",
+      "packets": 1,
+      "bytes": 40,
+      "dur": 0.0
+    },
+    {
+      "src": "192.168.1.1",
+      "dst": "192.168.1.66",
+      "sport": 5900,
+      "dport": 40017,
+      "proto": "tcp",
+      "service": "",
+      "packets": 1,
+      "bytes": 40,
+      "dur": 0.0
+    },
+    {
+      "src": "192.168.1.1",
+      "dst": "192.168.1.66",
+      "sport": 8080,
+      "dport": 40018,
+      "proto": "tcp",
+      "service": "http",
+      "packets": 1,
+      "bytes": 40,
+      "dur": 0.0
+    },
+    {
+      "src": "192.168.1.1",
+      "dst": "192.168.1.66",
+      "sport": 8443,
+      "dport": 40019,
+      "proto": "tcp",
+      "service": "tls",
+      "packets": 1,
+      "bytes": 40,
+      "dur": 0.0
+    }
+  ]
+}

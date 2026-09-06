@@ -1,0 +1,6 @@
+"""Type stub for the native pybind11 core (:mod:`athar._core`)."""
+
+def parse_file(
+    path: str,
+) -> list[tuple[float, str, str, int, int, int, int, bytes, str, str, int, int, int]]: ...
+def backend_name() -> str: ...
